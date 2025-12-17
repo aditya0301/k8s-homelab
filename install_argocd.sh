@@ -8,6 +8,7 @@ kubectl patch configmap argocd-cmd-params-cm -n argocd   --type merge   -p '{"da
 kubectl get configmap argocd-cmd-params-cm -n argocd -o yaml | grep -Hn server.insecure
 kubectl rollout restart deployment argocd-server -n argocd
 
+sleep 20
 echo $(kubectl -n argocd get secrets argocd-initial-admin-secret -o yaml | grep password | awk -F: '{ print $2 }') | base64 -d
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
 kubectl get svc/argocd-server -n argocd
@@ -17,6 +18,14 @@ PASSWD=`echo $(kubectl -n argocd get secrets argocd-initial-admin-secret -o yaml
 echo $PASSWD
 echo "-----------------"
 
-argocd login localhost:32641
+NODE_PORT=$(kubectl get svc/argocd-server -n argocd | awk -F: '{ print $2 }'  | cut -d'/' -f1 | xargs)
+echo $NODE_PORT
+sleep 20
+argocd login localhost:$NODE_PORT
 kubectl config set-context --current --namespace=argocd
 argocd app create argocd --repo https://github.com/aditya0301/k8s-homelab.git --path argocd/k8s/overlays/shared --dest-server https://kubernetes.default.svc --dest-namespace default
+
+
+
+
+
