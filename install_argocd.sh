@@ -29,7 +29,7 @@ sleep 20
 # login and create default Application
 argocd login localhost:$NODE_PORT
 kubectl config set-context --current --namespace=argocd
-argocd app create argocd --repo https://github.com/aditya0301/k8s-homelab.git --path argocd/k8s/overlays/shared --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app create argocd --sync-policy automated --repo https://github.com/aditya0301/k8s-homelab.git --path argocd/k8s/overlays/shared --dest-server https://kubernetes.default.svc --dest-namespace default
 
 
 
