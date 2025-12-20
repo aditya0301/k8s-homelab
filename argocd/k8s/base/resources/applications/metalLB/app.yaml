@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metalLB-shared
+  name: metallb-shared
   namespace: argocd
 spec:
   project: platform
