@@ -1,3 +1,4 @@
 resources:
   - projects/platform.yaml
   - applications/dashboard/app.yaml
+  - applications/metalLB/app.yaml
