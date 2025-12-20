@@ -1,0 +1,30 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.0.201/32
+  - 192.168.0.202/32
+  - 192.168.0.203/32
+  - 192.168.0.204/32
+  - 192.168.0.205/32
+  - 192.168.0.206/32
+  - 192.168.0.207/32
+  - 192.168.0.208/32
+  - 192.168.0.209/32
+  - 192.168.0.210/32
+
+
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+
