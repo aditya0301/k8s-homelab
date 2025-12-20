@@ -1,2 +1,3 @@
 resources:
   - projects/platform.yaml
+  - dashboard/application.yaml
