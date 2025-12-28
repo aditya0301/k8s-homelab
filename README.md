@@ -19,3 +19,7 @@ sudo sysctl -p
 echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
+
+<!-- get dashboard token -->
+kubectl get secret admin-user -n kube-system -o jsonpath="{.data.token}" | base64 -d
+
